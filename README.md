@@ -15,7 +15,7 @@ A Python-based application to classify news articles as **Real** or **Fake** usi
   * Load a **random sample** from the dataset for testing
   * Clear fields for new input
 * Save and load trained model to avoid retraining every time.
-
+## fake news detection AI project 2025 3rd sem
 ---
 
 ## Dataset

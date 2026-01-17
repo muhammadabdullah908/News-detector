@@ -13,7 +13,8 @@ MODEL_PATH = "models/fakenews_pipeline.joblib"
 FAKE_CSV = "Fake.csv"
 TRUE_CSV = "True.csv"
 
-# ---------------- LOAD DATA ----------------
+# ---------------- LOAD DATA ----------------  this is my changes
+#
 def load_kaggle_dataset(fake_path, true_path):
     try:
         fake_df = pd.read_csv(fake_path)
