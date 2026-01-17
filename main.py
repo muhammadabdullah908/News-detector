@@ -96,20 +96,65 @@ def predict_article():
     output.insert(END, f"Probability REAL: {prob[0]:.4f}\n")
     output.insert(END, f"Probability FAKE: {prob[1]:.4f}\n")
 
+
+#changed code
+
 def load_random_sample():
-    if df is None:
-        messagebox.showerror("Dataset Missing", "Dataset not loaded.")
+    """
+    Load a random news article from the dataset
+    and populate the Title and Text fields.
+    """
+    if df is None or df.empty:
+        messagebox.showerror("Dataset Missing", "Dataset is not available or empty.")
         return
-    row = df.sample(1).iloc[0]
+
+    # Select a random row
+    random_row = df.sample(n=1).iloc[0]
+
+    # Clear existing fields
     title_entry.delete(0, END)
     text_entry.delete("1.0", END)
-    title_entry.insert(END, str(row["title"]))
-    text_entry.insert("1.0", str(row["text"]))
+    output.delete("1.0", END)
+
+    # Insert new data
+    title_entry.insert(END, str(random_row["title"]))
+    text_entry.insert("1.0", str(random_row["text"]))
+
+    # Inform user
+    output.insert(END, "Random sample loaded successfully.\n")
+
+
+def clear_all_fields():
+    """Clear title, text, and output fields."""
+    title_entry.delete(0, END)
+    text_entry.delete("1.0", END)
+    output.delete("1.0", END)
+
 
 # ---------------- BUTTONS ----------------
-Button(root, text="Predict", command=predict_article, width=20, bg="lightblue").pack(pady=5)
-Button(root, text="Load Random Sample", command=load_random_sample, width=20, bg="lightgreen").pack(pady=5)
-Button(root, text="Clear Fields", command=lambda: [title_entry.delete(0, END), text_entry.delete("1.0", END), output.delete("1.0", END)], width=20, bg="lightgray").pack(pady=5)
+Button(
+    root,
+    text="Predict",
+    command=predict_article,
+    width=25,
+    bg="lightblue"
+).pack(pady=6)
+
+Button(
+    root,
+    text="Load Random News",
+    command=load_random_sample,
+    width=25,
+    bg="lightgreen"
+).pack(pady=6)
+
+Button(
+    root,
+    text="Clear All",
+    command=clear_all_fields,
+    width=25,
+    bg="lightgray"
+).pack(pady=6)
 
 # ---------------- MAIN LOOP ----------------
 root.mainloop()
